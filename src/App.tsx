@@ -77,7 +77,7 @@ function Header() {
       <a className="wordmark" href="#top" aria-label="Heez Mos home">HM<span>®</span></a>
       <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation"><span /><span /></button>
       <nav className={menuOpen ? "nav-links nav-open" : "nav-links"} aria-label="Main navigation">
-        {[["About", "#about"], ["Capabilities", "#capabilities"], ["Work", "#work"], ["Journey", "#journey"]].map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
+        {[["About", "#about"], ["Capabilities", "#capabilities"], ["Projects", "#work"], ["Journey", "#journey"]].map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
         <a className="nav-contact" href="#contact" onClick={() => setMenuOpen(false)}>Let's talk <span>↗</span></a>
       </nav>
     </header>
@@ -115,7 +115,7 @@ function App() {
 
         <section className="work-section section-wrap" id="work">
           <div className="section-heading"><div><p className="eyebrow">03 / SELECTED WORK & INITIATIVES</p><h2>Ideas becoming<br /><em>real-world work.</em></h2></div><p className="section-note">A growing collection of projects, initiatives and professional contributions. Each item is labelled by its actual stage.</p></div>
-          <div className="project-grid">{projects.map((p) => <Reveal key={p.number}><article className="project-card"><div className="project-visual"><span>{p.number}</span><div className="visual-mark">{p.number === "01" ? "E" : p.number === "02" ? "D" : "↗"}</div><span className="visual-caption">HEEZ MOS / WORK NOTES</span></div><div className="project-meta"><span>{p.type}</span><span>{p.status}</span></div><h3>{p.title}</h3><p>{p.copy}</p><div className="tag-list">{p.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></article></Reveal>)}</div>
+          <div className="project-grid">{projects.map((p) => <Reveal key={p.number}><article className="project-card"><div className="project-visual"><span>{p.number}</span><div className="visual-mark">{p.number === "01" ? "E" : p.number === "02" ? "D" : "↗"}</div><span className="visual-caption">HEEZ MOS / WORK NOTES</span></div><div className="project-meta"><span>{p.type}</span><span>{p.status}</span></div><h3>{p.title}</h3><p>{p.copy}</p><div className="tag-list">{p.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions">{p.number === "01" ? <a href="https://github.com/Heezmos/edubridge-africa" target="_blank" rel="noreferrer">Explore project repository <span>↗</span></a> : p.number === "02" ? <a href="#about">Read the venture direction <span>↗</span></a> : <a href="#journey">View my contribution <span>↗</span></a>}</div></article></Reveal>)}</div>
         </section>
 
         <section className="journey section-wrap" id="journey">

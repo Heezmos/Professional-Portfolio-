@@ -24,37 +24,14 @@ export type Project = {
   impact: string;
   stack: string[];
   link?: string;
-  status: "Prototype / in development" | "Foundation / planning" | "Professional experience";
+  status: "Public website / product ecosystem" | "Public website / group portfolio" | "Active MVP build" | "Web v1.0 release";
 };
 
 export const PROJECTS: Project[] = [
-  {
-    title: "EduBridge Africa",
-    year: "2026",
-    domains: ["Product", "Engineering", "Data"],
-    summary: "A digital library and learning platform concept for university and college students, beginning with business and economics.",
-    impact: "Prototype / in development. No public launch or usage metrics claimed.",
-    stack: ["Education technology", "Digital library", "AI-assisted research"],
-    status: "Prototype / in development",
-  },
-  {
-    title: "Delight Ventures",
-    year: "2026",
-    domains: ["Strategy", "Product", "Engineering"],
-    summary: "A technology venture studio foundation focused on owned digital products, AI-powered business solutions and venture incubation.",
-    impact: "Foundation and planning stage. Not presented as a launched operating company.",
-    stack: ["Venture building", "Digital products", "Business technology"],
-    status: "Foundation / planning",
-  },
-  {
-    title: "Government Payroll & Payslip Systems",
-    year: "2023–2026",
-    domains: ["Strategy", "Data", "Product"],
-    summary: "Project coordination during system development, with participation in monthly payroll dataset analysis and report preparation before payment rollout.",
-    impact: "Professional contribution. No unverified performance figures or outcomes claimed.",
-    stack: ["Project coordination", "Payroll data analysis", "Reporting"],
-    status: "Professional experience",
-  },
+  { title: "Ecofarms", year: "2026", domains: ["Product", "Engineering", "Strategy"], summary: "An integrated agribusiness initiative connecting food production, partner farmers and market demand in Sierra Leone.", impact: "Public website and product ecosystem. Explore the public site for the current experience.", stack: ["Agribusiness", "Farmer network", "Market access"], link: "https://heezmos.github.io/Eco-farms-Limited/", status: "Public website / product ecosystem" },
+  { title: "Delight Holdings", year: "2026", domains: ["Strategy", "Product", "Engineering"], summary: "A group website presenting business and digital service divisions alongside a portfolio of ventures.", impact: "Public repository and website source. A separately verified live URL is not listed.", stack: ["Venture portfolio", "Digital solutions", "Business services"], link: "https://github.com/Heezmos/DELIGHT-VENTURES", status: "Public website / group portfolio" },
+  { title: "E-School Management", year: "2026", domains: ["Product", "Engineering", "Data"], summary: "A multi-tenant school management platform with role-based portals and core school administration workflows.", impact: "Active MVP build; not presented as a launched production service.", stack: ["Next.js", "TypeScript", "Supabase"], link: "https://github.com/Heezmos/E-School-Management-System", status: "Active MVP build" },
+  { title: "EZGo", year: "2026", domains: ["Product", "Engineering", "Strategy"], summary: "A travel platform for ride bookings, regional-flight planning and local tour-guide experiences.", impact: "Web v1.0 release. Flight results remain illustrative until live airline inventory and ticketing are integrated.", stack: ["Travel technology", "Booking workflows", "Payments"], link: "https://ezgo-platform.vercel.app/", status: "Web v1.0 release" },
 ];
 
 export type Job = {

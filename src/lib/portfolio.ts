@@ -1,19 +1,19 @@
 export type Domain = "Engineering" | "Design" | "Product" | "Data" | "Strategy";
 
 export const DOMAINS: { id: Domain; label: string }[] = [
-  { id: "Engineering", label: "Software Engineering" },
-  { id: "Design", label: "UI/UX & Product Design" },
-  { id: "Product", label: "Full-Stack Product" },
+  { id: "Engineering", label: "Software & Systems" },
+  { id: "Design", label: "Product & Experience" },
+  { id: "Product", label: "Product Development" },
   { id: "Data", label: "Business & Data Analytics" },
-  { id: "Strategy", label: "Digital Transformation Strategy" },
+  { id: "Strategy", label: "Digital Transformation" },
 ];
 
 export const PROFILE = {
   name: "Heez Mos",
-  email: "hello@heezmos.com",
-  linkedin: "https://www.linkedin.com/",
-  github: "https://github.com/",
-  location: "Available remote & on-site",
+  email: "",
+  linkedin: "",
+  github: "https://github.com/Heezmos",
+  location: "Sierra Leone",
 };
 
 export type Project = {
@@ -24,64 +24,36 @@ export type Project = {
   impact: string;
   stack: string[];
   link?: string;
+  status: "Prototype / in development" | "Foundation / planning" | "Professional experience";
 };
 
 export const PROJECTS: Project[] = [
   {
-    title: "Paperless Ops Transformation",
+    title: "EduBridge Africa",
     year: "2026",
-    domains: ["Strategy", "Data"],
-    summary: "Led a digital transformation roadmap moving a 300-person logistics firm from paper workflows to cloud tools.",
-    impact: "Processing time down 55%; 92% staff adoption within 6 months.",
-    stack: ["Roadmapping", "Change management", "Process mapping", "KPIs"],
+    domains: ["Product", "Engineering", "Data"],
+    summary: "A digital library and learning platform concept for university and college students, beginning with business and economics.",
+    impact: "Prototype / in development. No public launch or usage metrics claimed.",
+    stack: ["Education technology", "Digital library", "AI-assisted research"],
+    status: "Prototype / in development",
   },
   {
-    title: "Ledgerline — Finance Ops Platform",
+    title: "Delight Ventures",
     year: "2026",
-    domains: ["Engineering", "Product"],
-    summary: "End-to-end invoicing and reconciliation tool for small finance teams, from schema to UI.",
-    impact: "Cut month-end close time by 40% for pilot customers.",
-    stack: ["TypeScript", "React", "PostgreSQL", "Node"],
+    domains: ["Strategy", "Product", "Engineering"],
+    summary: "A technology venture studio foundation focused on owned digital products, AI-powered business solutions and venture incubation.",
+    impact: "Foundation and planning stage. Not presented as a launched operating company.",
+    stack: ["Venture building", "Digital products", "Business technology"],
+    status: "Foundation / planning",
   },
   {
-    title: "Wayfind Mobile Redesign",
-    year: "2025",
-    domains: ["Design"],
-    summary: "Research-led redesign of a transit app's trip-planning flow and design system.",
-    impact: "Task success up from 62% to 91% in usability testing.",
-    stack: ["Figma", "User research", "Design systems"],
-  },
-  {
-    title: "Churn Signal Dashboard",
-    year: "2025",
-    domains: ["Data", "Engineering"],
-    summary: "Predictive churn model and executive dashboard built on product usage events.",
-    impact: "Flagged at-risk accounts 3 weeks earlier; saved ~$180k ARR.",
-    stack: ["Python", "SQL", "dbt", "Looker"],
-  },
-  {
-    title: "Pantry — Food Rescue Marketplace",
-    year: "2024",
-    domains: ["Product", "Design", "Engineering"],
-    summary: "Shipped a two-sided marketplace MVP connecting restaurants with local shelters.",
-    impact: "12 partners and 4,000 meals redirected in the first quarter.",
-    stack: ["Next.js", "Stripe", "Figma", "Supabase"],
-  },
-  {
-    title: "Pricing Experiment Framework",
-    year: "2024",
-    domains: ["Data", "Product"],
-    summary: "Designed and analyzed A/B tests for a SaaS pricing page overhaul.",
-    impact: "+18% trial-to-paid conversion on the winning variant.",
-    stack: ["Statistics", "Amplitude", "SQL"],
-  },
-  {
-    title: "Component Library & Tokens",
-    year: "2023",
-    domains: ["Design", "Engineering"],
-    summary: "Unified a fragmented UI into an accessible, themeable component library.",
-    impact: "Reduced UI bug reports by 35%; WCAG AA across core flows.",
-    stack: ["React", "Storybook", "Tokens"],
+    title: "Government Payroll & Payslip Systems",
+    year: "2023–2026",
+    domains: ["Strategy", "Data", "Product"],
+    summary: "Project coordination during system development, with participation in monthly payroll dataset analysis and report preparation before payment rollout.",
+    impact: "Professional contribution. No unverified performance figures or outcomes claimed.",
+    stack: ["Project coordination", "Payroll data analysis", "Reporting"],
+    status: "Professional experience",
   },
 ];
 
@@ -95,50 +67,13 @@ export type Job = {
 
 export const JOBS: Job[] = [
   {
-    role: "Digital Transformation Strategist",
-    company: "Atlas Advisory",
-    period: "2025 — Present",
-    domains: ["Strategy", "Product"],
+    role: "Project Coordination & Payroll Data Analysis",
+    company: "Ministry of Finance, Sierra Leone",
+    period: "2023 — 2026",
+    domains: ["Strategy", "Data", "Product"],
     points: [
-      "Advise leadership teams on modernizing operations, tooling and data culture.",
-      "Translate business goals into phased technology roadmaps with clear ROI.",
+      "Coordinated activities during the development of government payroll and payslip systems.",
+      "Participated in monthly payroll dataset analysis and preparation of reports before payment rollout.",
     ],
-  },
-  {
-    role: "Full-Stack Product Engineer",
-    company: "Northwind Labs",
-    period: "2024 — Present",
-    domains: ["Engineering", "Product"],
-    points: [
-      "Own features from discovery to production across a React/Node stack.",
-      "Lead weekly product reviews with design and customer success.",
-    ],
-  },
-  {
-    role: "Product Designer",
-    company: "Brightpath Studio",
-    period: "2022 — 2024",
-    domains: ["Design", "Product"],
-    points: [
-      "Designed web and mobile experiences for 8 client products.",
-      "Ran user interviews and usability studies to shape roadmaps.",
-    ],
-  },
-  {
-    role: "Business & Data Analyst",
-    company: "Meridian Retail Group",
-    period: "2020 — 2022",
-    domains: ["Data"],
-    points: [
-      "Built KPI dashboards used by leadership in weekly planning.",
-      "Modeled inventory demand, reducing overstock by 22%.",
-    ],
-  },
-  {
-    role: "Software Engineering Intern",
-    company: "Cobalt Systems",
-    period: "2019",
-    domains: ["Engineering"],
-    points: ["Shipped internal tooling that automated release notes for 30+ engineers."],
   },
 ];

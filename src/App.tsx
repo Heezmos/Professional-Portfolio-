@@ -1,40 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, Stars } from "@react-three/drei";
-import * as THREE from "three";
-
-function Orb() {
-  const mesh = useRef<THREE.Mesh>(null);
-  useFrame((state, delta) => {
-    if (!mesh.current) return;
-    mesh.current.rotation.x += delta * 0.12;
-    mesh.current.rotation.y += delta * 0.2;
-    mesh.current.position.y = Math.sin(state.clock.elapsedTime * 0.55) * 0.12;
-  });
-  return (
-    <Float speed={1.1} rotationIntensity={0.25} floatIntensity={0.35}>
-      <mesh ref={mesh}>
-        <icosahedronGeometry args={[1.25, 32]} />
-        <MeshDistortMaterial color="#e45c32" roughness={0.18} metalness={0.22} distort={0.34} speed={1.5} />
-      </mesh>
-    </Float>
-  );
-}
 
 function HeroArtwork() {
   return (
-    <div className="hero-art" aria-label="Abstract animated 3D form">
-      <div className="art-index">FIG. 01 — BUILDING AT THE INTERSECTION</div>
-      <Canvas camera={{ position: [0, 0, 4.6], fov: 38 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }}>
-        <ambientLight intensity={1.1} />
-        <directionalLight position={[3, 4, 5]} intensity={2.2} color="#fff0df" />
-        <pointLight position={[-3, -2, 2]} intensity={2} color="#e45c32" />
-        <Orb />
-        <Stars radius={9} depth={5} count={220} factor={1.5} saturation={0} fade speed={0.3} />
-      </Canvas>
-      <div className="art-orbit orbit-one" />
-      <div className="art-orbit orbit-two" />
-      <span className="art-caption">IDEAS → SYSTEMS → IMPACT</span>
+    <div className="hero-art" aria-label="Abstract visual representing ideas becoming systems">
+      <div className="hero-art-top"><span>HM / 001</span><span>BUSINESS × TECHNOLOGY</span></div>
+      <div className="hero-art-grid" />
+      <div className="hero-art-core"><span>H</span><i /><b /></div>
+      <div className="hero-art-ring ring-a" /><div className="hero-art-ring ring-b" />
+      <div className="hero-art-bottom"><span>IDEAS → SYSTEMS</span><span>SIERRA LEONE · AFRICA</span></div>
     </div>
   );
 }
@@ -141,6 +114,15 @@ function App() {
           <div className="journey-grid">
             <Reveal><div className="timeline-item"><span className="timeline-date">2023 — 2026</span><div><h3>Payroll & Payslip Systems</h3><p className="timeline-org">Ministry of Finance · Sierra Leone</p><p>Coordinated activities during the development of government payroll and payslip systems, and contributed to monthly payroll dataset analysis and report preparation before payment rollout.</p><span className="timeline-label">PROJECT COORDINATION / DATA ANALYSIS</span></div></div></Reveal>
             <Reveal delay={120}><div className="education-card"><p className="eyebrow">EDUCATION</p><h3>International Business & Trade</h3><p>Bachelor's degree · Second Class Lower (2:2)</p><div className="education-line" /><h3>Software Engineering</h3><p>Professional certificate</p></div></Reveal>
+          </div>
+        </section>
+
+        <section className="proof-section section-wrap" aria-label="Professional approach">
+          <div className="proof-label"><span>THE WAY I WORK</span><span>01 — 03</span></div>
+          <div className="proof-grid">
+            <article><span>01</span><h3>Understand<br/><em>the problem.</em></h3><p>Start with the people, process and business need — not the technology.</p></article>
+            <article><span>02</span><h3>Build with<br/><em>purpose.</em></h3><p>Shape practical systems and digital experiences around real use cases.</p></article>
+            <article><span>03</span><h3>Learn from<br/><em>the outcome.</em></h3><p>Use feedback and evidence to improve what has been built.</p></article>
           </div>
         </section>
 

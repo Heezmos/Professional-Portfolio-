@@ -1,157 +1,69 @@
 import { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, Stars } from "@react-three/drei";
-import * as THREE from "three";
 
-function Orb() {
-  const mesh = useRef<THREE.Mesh>(null);
-  useFrame((state, delta) => {
-    if (!mesh.current) return;
-    mesh.current.rotation.x += delta * 0.12;
-    mesh.current.rotation.y += delta * 0.2;
-    mesh.current.position.y = Math.sin(state.clock.elapsedTime * 0.55) * 0.12;
-  });
-  return (
-    <Float speed={1.1} rotationIntensity={0.25} floatIntensity={0.35}>
-      <mesh ref={mesh}>
-        <icosahedronGeometry args={[1.25, 32]} />
-        <MeshDistortMaterial color="#e45c32" roughness={0.18} metalness={0.22} distort={0.34} speed={1.5} />
-      </mesh>
-    </Float>
-  );
-}
-
-function HeroArtwork() {
-  return (
-    <div className="hero-art" aria-label="Abstract animated 3D form">
-      <div className="art-index">FIG. 01 — BUILDING AT THE INTERSECTION</div>
-      <Canvas camera={{ position: [0, 0, 4.6], fov: 38 }} dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }}>
-        <ambientLight intensity={1.1} />
-        <directionalLight position={[3, 4, 5]} intensity={2.2} color="#fff0df" />
-        <pointLight position={[-3, -2, 2]} intensity={2} color="#e45c32" />
-        <Orb />
-        <Stars radius={9} depth={5} count={220} factor={1.5} saturation={0} fade speed={0.3} />
-      </Canvas>
-      <div className="art-orbit orbit-one" />
-      <div className="art-orbit orbit-two" />
-      <span className="art-caption">IDEAS → SYSTEMS → IMPACT</span>
-    </div>
-  );
-}
-
-const disciplines = [
-  { n: "01", title: "Software & Systems", copy: "Building practical digital systems that solve real operational problems.", tags: "Software engineering · APIs · Systems thinking" },
-  { n: "02", title: "Product Development", copy: "Turning an early idea into a useful, testable product with a clear path forward.", tags: "Product thinking · Prototyping · Delivery" },
-  { n: "03", title: "Business & Data", copy: "Working with business information, analysis and reporting to support better decisions.", tags: "Data analysis · Reporting · Business intelligence" },
-  { n: "04", title: "Digital Transformation", copy: "Connecting people, processes and technology to improve how organisations work.", tags: "Process improvement · Coordination · Change" },
+const services = [
+  { n: "01", title: "Digital product thinking", body: "Shaping early ideas into clear product direction — understanding the people, problem, purpose and practical path to a useful first release.", tags: "PRODUCT DISCOVERY · ROADMAPS · PROTOTYPING" },
+  { n: "02", title: "Business systems & software", body: "Coordinating the design and development of digital systems that organise information, improve workflows and support everyday operations.", tags: "WEB APPLICATIONS · BUSINESS SYSTEMS · WORKFLOWS" },
+  { n: "03", title: "Data, insight & reporting", body: "Working with structured information, analysis and reporting to help teams understand performance and make better-informed decisions.", tags: "DATA ANALYSIS · REPORTING · BUSINESS INTELLIGENCE" },
+  { n: "04", title: "Digital transformation", body: "Connecting business processes, people and technology to make services more accessible, operations more effective and change more manageable.", tags: "PROCESS IMPROVEMENT · COORDINATION · DIGITAL STRATEGY" },
+  { n: "05", title: "AI & automation", body: "Exploring practical, responsible uses of AI and automation to reduce repetitive work, improve access to information and support better services.", tags: "AI-ENABLED SOLUTIONS · AUTOMATION · RESEARCH" },
 ];
 
 const projects = [
-  { number: "01", title: "Ecofarms", type: "Agribusiness & digital agriculture", status: "PUBLIC WEBSITE / PRODUCT ECOSYSTEM", copy: "An integrated agribusiness initiative connecting food production, partner farmers and market demand in Sierra Leone.", focus: "Public website, farmer connection experience and the wider digital agriculture ecosystem.", note: "Explore the public site and Farmers Connect experience to understand the current concept.", tags: ["Agribusiness", "Farmer network", "Market access"], links: [{ label: "Visit website", href: "https://heezmos.github.io/Eco-farms-Limited/" }, { label: "View source", href: "https://github.com/Heezmos/Eco-farms-Limited" }] },
-  { number: "02", title: "Delight Holdings", type: "Venture group & digital solutions", status: "PUBLIC WEBSITE / GROUP PORTFOLIO", copy: "A group website presenting business and digital service divisions alongside a portfolio of ventures spanning travel, education, payments, agriculture and healthcare.", focus: "Group positioning, venture presentation, service information and an enquiry pathway for prospective clients.", note: "Visit the live group website to review its services, venture portfolio and enquiry experience.", tags: ["Venture portfolio", "Digital solutions", "Business services"], links: [{ label: "Visit live website", href: "https://delight-ventures.vercel.app/" }, { label: "View source", href: "https://github.com/Heezmos/DELIGHT-VENTURES" }] },
-  { number: "03", title: "E-School Management", type: "Education management SaaS", status: "ACTIVE MVP BUILD", copy: "A multi-tenant school management platform designed around role-based access for school administrators, teachers, parents or guardians, and students.", focus: "School and user access foundations, student and teacher records, classes, attendance, assessments and report-card workflows.", note: "The repository describes this as an active MVP build, not a launched production service.", tags: ["Next.js", "TypeScript", "Supabase"], links: [{ label: "Explore project repository", href: "https://github.com/Heezmos/E-School-Management-System" }] },
-  { number: "04", title: "EZGo", type: "Travel booking platform", status: "WEB V1.0 RELEASE", copy: "A travel platform bringing together ride bookings, regional-flight planning and local tour-guide experiences, supported by customer, partner and management workflows.", focus: "Booking journeys, customer accounts, partner operations, management tools and hosted payment workflows.", note: "Flight results are illustrative planning options until live airline inventory and ticketing are integrated.", tags: ["Travel technology", "Booking workflows", "Payments"], links: [{ label: "Visit live platform", href: "https://ezgo-platform.vercel.app/" }] },
+  { n: "01", name: "Ecofarms", kind: "AGRIBUSINESS / DIGITAL AGRICULTURE", text: "An integrated agribusiness initiative connecting food production, partner farmers and market demand in Sierra Leone.", status: "PUBLIC WEBSITE", focus: "Food production · Farmer partnerships · Market access", url: "https://heezmos.github.io/Eco-farms-Limited/", repo: "https://github.com/Heezmos/Eco-farms-Limited", cls: "eco", symbol: "E", caption: "GROWING CONNECTIONS" },
+  { n: "02", name: "Delight Holdings", kind: "VENTURE GROUP / DIGITAL SOLUTIONS", text: "A group website presenting business and digital service divisions alongside a portfolio of ventures across travel, education, payments, agriculture and healthcare.", status: "PUBLIC WEBSITE", focus: "Venture portfolio · Business services · Digital systems", url: "https://delight-ventures.vercel.app/", repo: "https://github.com/Heezmos/DELIGHT-VENTURES", cls: "delight", symbol: "D", caption: "IDEAS BUILT TO GROW" },
+  { n: "03", name: "E-School Management", kind: "EDTECH / SCHOOL MANAGEMENT SAAS", text: "A multi-tenant school management platform designed around role-based access for administrators, teachers, parents or guardians, and students.", status: "ACTIVE MVP BUILD", focus: "Next.js · TypeScript · Supabase", url: "https://github.com/Heezmos/E-School-Management-System", cls: "school", symbol: "S", caption: "BETTER TOOLS FOR LEARNING" },
+  { n: "04", name: "EZGo", kind: "TRAVEL TECHNOLOGY / BOOKING PLATFORM", text: "A travel platform bringing together ride bookings, regional-flight planning and local tour-guide experiences, supported by customer, partner and management workflows.", status: "WEB V1.0 RELEASE", focus: "Booking workflows · Partner operations · Payments", url: "https://ezgo-platform.vercel.app/", cls: "ezgo", symbol: "Z", caption: "MOVE WITH POSSIBILITY" },
 ];
 
-
-function ProjectGallery({ number, title }: { number: string; title: string }) {
-  const slug = number === "01" ? "ecofarms" : number === "02" ? "delight-holdings" : number === "03" ? "e-school" : "ezgo";
-  const [failed, setFailed] = useState([false, false, false]);
-  return (
-    <div className="case-gallery" aria-label={title + " visual evidence"}>
-      {[1, 2, 3].map((n, i) => (
-        <figure className="case-gallery-frame" key={n}>
-          {!failed[i] && <img src={`/images/projects/${slug}-0${n}.webp`} alt={`${title} project screen ${n}`} loading="lazy" onError={() => setFailed((old) => old.map((v, index) => index === i ? true : v))} />}
-          {failed[i] && <div className="gallery-pending"><span>VISUAL EVIDENCE / 0{n}</span><strong>{title}</strong><small>Original project screenshot to be added</small></div>}
-          <figcaption>SCREEN 0{n} <span>{title.toUpperCase()}</span></figcaption>
-        </figure>
-      ))}
-    </div>
-  );
-}
-
-function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setVisible(true);
-        observer.disconnect();
-      }
+      if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
     }, { threshold: 0.12 });
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
-  return <div ref={ref} className={visible ? "reveal is-visible" : "reveal"} style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
+  return { ref, visible };
 }
-
+function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const { ref, visible } = useReveal();
+  return <div ref={ref} className={`reveal ${visible ? "shown" : ""} ${className}`}>{children}</div>;
+}
 function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  return (
-    <header className="site-header">
-      <a className="wordmark" href="#top" aria-label="Heez Mos home">HM<span>®</span></a>
-      <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation"><span /><span /></button>
-      <nav className={menuOpen ? "nav-links nav-open" : "nav-links"} aria-label="Main navigation">
-        {[["About", "#about"], ["Capabilities", "#capabilities"], ["Projects", "#work"], ["Journey", "#journey"]].map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
-        <a className="nav-contact" href="#contact" onClick={() => setMenuOpen(false)}>Let's talk <span>↗</span></a>
-      </nav>
-    </header>
-  );
+  const [open, setOpen] = useState(false);
+  const links = [["Skills", "#skills"], ["About", "#about"], ["Portfolio", "#portfolio"], ["Journey", "#journey"], ["Contact", "#contact"]];
+  return <header className="header"><a className="brand" href="#top">HM<span>®</span></a><button className="menu-button" aria-label="Toggle navigation" aria-expanded={open} onClick={() => setOpen(!open)}><i/><i/></button><nav className={open ? "nav open" : "nav"}>{links.map(([label, href]) => <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>)}</nav><a className="nav-cta" href="#contact">LET'S TALK <b>↗</b></a></header>;
 }
-
+function HeroArtwork() {
+  return <div className="hero-art">
+    <img className="hero-portrait" src="/images/heez-mos.webp" alt="Henrison Moseray wearing a charcoal suit and red tie" width="512" height="512" fetchPriority="high" />
+    <span className="art-caption caption-left">INDEPENDENT THINKING</span><span className="art-caption caption-right">FREETOWN · SIERRA LEONE</span>
+  </div>;
+}
 function App() {
-  const [year] = useState(new Date().getFullYear());
-  return (
-    <div className="site-shell" id="top">
-      <Header />
-      <main>
-        <section className="hero section-wrap">
-          <div className="hero-copy">
-            <p className="eyebrow"><span className="status-dot" /> SIERRA LEONE · WORKING ACROSS DISCIPLINES</p>
-            <h1>Business in mind.<br /><em>Technology</em> in motion.</h1>
-            <p className="hero-intro">I'm Heez Mos — I work where business, technology and data meet, helping turn complex ideas and operational needs into useful digital solutions.</p>
-            <div className="hero-actions"><a className="button button-dark" href="#work">Explore selected work <span>↘</span></a><a className="text-link" href="#about">A little about me <span>↓</span></a></div>
-          </div>
-          <HeroArtwork />
-          <div className="hero-foot"><span>INDEPENDENT THINKING / PRACTICAL BUILDING</span><span>SCROLL TO EXPLORE ↓</span></div>
-        </section>
+  const year = new Date().getFullYear();
+  return <div className="site" id="top"><Header/><main>
+    <section className="hero"><div className="hero-meta"><span>BUSINESS · TECHNOLOGY · DATA</span><span>PORTFOLIO / 2026</span></div><div className="hero-grid"><div className="hero-copy"><p className="eyebrow"><span/> BUILDER · SYSTEMS THINKER · PROBLEM SOLVER</p><h1>HENRISON<br/><em>MOSERAY.</em></h1><p className="hero-line">Business in mind.<br/><i>Technology in motion.</i></p><p className="hero-description">I bring business understanding and technology together to shape useful digital products, systems and solutions.</p><div className="hero-actions"><a className="button button-orange" href="#portfolio">EXPLORE SELECTED WORK <b>↘</b></a><a className="text-link" href="#about">A LITTLE ABOUT ME <span>↗</span></a></div></div><HeroArtwork/></div><div className="hero-foot"><span>SCROLL TO EXPLORE</span><span>01 — 06</span><span>© HENRISON MOSERAY</span></div></section>
 
-        <div className="ticker" aria-label="Areas of focus"><div className="ticker-track">{Array.from({ length: 2 }).flatMap((_, i) => ["SOFTWARE", "PRODUCT", "DATA", "DIGITAL TRANSFORMATION", "BUSINESS SYSTEMS"].map((word, j) => <span key={i + "-" + j}>{word}<b>✳</b></span>))}</div></div>
+    <section className="skills section-pad" id="skills"><div className="section-intro"><div><p className="kicker">01 / WHAT I BRING</p><h2>What I do<br/><em>best.</em></h2></div><p className="intro-aside">A practical, cross-disciplinary approach to understanding challenges and turning them into meaningful digital outcomes.</p></div><div className="service-list">{services.map(s => <Reveal key={s.n}><article className="service-row"><span className="service-no">{s.n}</span><div className="service-copy"><h3>{s.title}</h3><p>{s.body}</p><small>{s.tags}</small></div><span className="service-arrow">↗</span></article></Reveal>)}</div></section>
 
-        <section className="section-wrap intro-section" id="about">
-          <Reveal><p className="eyebrow">01 / THE THROUGH-LINE</p><h2>I connect the dots between <em>how business works</em> and what technology can make possible.</h2></Reveal>
-          <Reveal delay={100}><div className="intro-aside"><p>My background combines international business and trade with software engineering and hands-on experience supporting digital systems and payroll data work. I enjoy understanding the real problem before deciding what to build.</p><a className="text-link" href="#journey">Explore my journey <span>↘</span></a></div></Reveal>
-        </section>
+    <section className="about section-pad" id="about"><div className="about-head"><p className="kicker">02 / BEHIND THE WORK</p><span className="about-mark">HM<span>®</span></span></div><div className="about-grid"><div className="about-title"><h2>Curious by nature.<br/><em>Practical by design.</em></h2><div className="about-visual"><div className="visual-lines"/><span>BUSINESS<br/>×<br/>TECHNOLOGY</span><small>THE SPACE IN BETWEEN</small></div></div><div className="about-copy"><p className="about-lead">I'm Henrison Moseray — a business-minded technology enthusiast interested in how thoughtful systems can solve real-world problems.</p><p>My background combines International Business and Trade with software engineering and practical experience supporting digital systems and payroll data processes.</p><p>I enjoy understanding how an organisation works — its people, processes and pressure points — then finding where technology can make a meaningful difference.</p><p>My work is guided by curiosity, clear thinking and a belief that useful technology should make life and work better.</p><a className="text-link" href="#journey">EXPLORE MY JOURNEY <span>↗</span></a></div></div></section>
 
-        <section className="capabilities section-wrap" id="capabilities">
-          <div className="section-heading"><div><p className="eyebrow">02 / WHAT I BRING</p><h2>One perspective.<br /><em>Multiple disciplines.</em></h2></div><p className="section-note">I like working across boundaries — from the business question to the system, and from the data to the next decision.</p></div>
-          <div className="capability-list">{disciplines.map((d) => <Reveal key={d.n}><article className="capability-row"><span className="cap-number">{d.n}</span><div><h3>{d.title}</h3><p>{d.copy}</p><small>{d.tags}</small></div><span className="row-arrow">↗</span></article></Reveal>)}</div>
-        </section>
+    <section className="ticker" aria-label="Areas of interest"><div className="ticker-track"><span>BUSINESS THINKING ✳</span><span>PRODUCT DEVELOPMENT ✳</span><span>DATA & INSIGHT ✳</span><span>DIGITAL SYSTEMS ✳</span><span>AI & AUTOMATION ✳</span><span>BUSINESS THINKING ✳</span><span>PRODUCT DEVELOPMENT ✳</span><span>DATA & INSIGHT ✳</span></div></section>
 
-        <section className="work-section section-wrap" id="work">
-          <div className="section-heading"><div><p className="eyebrow">03 / SELECTED WORK & INITIATIVES</p><h2>Ideas becoming<br /><em>real-world work.</em></h2></div><p className="section-note">A curated look at four projects and their current capabilities. Project descriptions explain what each product does; personal responsibilities are stated only where confirmed.</p></div>
-          <div className="project-grid">{projects.map((p) => <Reveal key={p.number}><article className="project-card"><div className="project-visual"><span>{p.number}</span><div className="visual-mark">{p.title === "Ecofarms" ? "E" : p.title === "Delight Holdings" ? "D" : p.title === "E-School Management" ? "S" : "Z"}</div><span className="visual-caption">HEEZ MOS / PROJECT NOTES</span></div><div className="project-meta"><span>{p.type}</span><span>{p.status}</span></div><h3>{p.title}</h3><p>{p.copy}</p><div className="project-detail"><span>PROJECT FOCUS</span><p>{p.focus}</p></div><div className="project-detail project-evidence"><span>STATUS & SCOPE NOTE</span><p>{p.note}</p></div><div className="tag-list">{p.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={"#case-" + p.number}>Read case study <span>↓</span></a>{p.links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label} <span>↗</span></a>)}</div></article></Reveal>)}</div><div className="case-study-list">{projects.map((p) => <Reveal key={"case-" + p.number}><article className="case-study" id={"case-" + p.number}><div className="case-index"><span>CASE STUDY / {p.number}</span><span>{p.status}</span></div><div className="case-heading"><div><p className="eyebrow">PROJECT DEEP DIVE</p><h3>{p.title}</h3><p className="case-lede">{p.copy}</p></div><div className="case-symbol" aria-hidden="true">{p.number === "01" ? "E" : p.number === "02" ? "D" : p.number === "03" ? "S" : "Z"}</div></div><ProjectGallery number={p.number} title={p.title} /><div className="case-columns"><div><span>THE IDEA</span><p>{p.focus}</p></div><div><span>WHAT TO REVIEW</span><p>{p.number === "01" ? "Explore the public website structure, agribusiness positioning and farmer connection pathway." : p.number === "02" ? "Review the group positioning, service divisions, venture portfolio, enquiry journey and documented lead-management backend." : p.number === "03" ? "Review role-based portals, tenant-aware school access, student and teacher records, attendance, assessments and report-card foundations." : "Explore the customer booking experience, account area, partner portal, management workflows and hosted payment journey."}</p></div><div><span>TECHNOLOGY / IMPLEMENTATION</span><p>{p.number === "01" ? "The repository contains a responsive public website and supporting Farmers Connect experience. Specific framework claims are intentionally omitted." : p.number === "02" ? "Public website with a Supabase-backed enquiry and lead pipeline; Edge Function and Resend integration are documented, with production email dependent on configured secrets." : p.number === "03" ? "Next.js, React, TypeScript, Supabase Auth, PostgreSQL and Row Level Security." : "Web platform with customer, partner and management areas and Monime hosted checkout; live airline inventory is not yet integrated."}</p></div><div><span>STAGE & TRANSPARENCY</span><p>{p.note}</p></div></div><div className="case-links">{p.links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label} ↗</a>)}</div></article></Reveal>)}</div>
-        </section>
+    <section className="recognition section-pad"><div className="section-intro"><div><p className="kicker">03 / HOW I APPROACH IT</p><h2>Grounded in<br/><em>the real.</em></h2></div><p className="intro-aside">No borrowed accolades or inflated numbers. The focus is on the problems being solved, the work being done and the value created.</p></div><div className="recognition-grid"><Reveal><div className="recognition-card"><span>01 / UNDERSTAND</span><h3>Start with<br/>the problem.</h3><p>Listen, ask better questions and understand the context before choosing a technology or building a solution.</p></div></Reveal><Reveal><div className="recognition-card"><span>02 / BUILD</span><h3>Make it<br/>useful.</h3><p>Turn clear requirements into practical products and systems, with attention to people, workflows and real constraints.</p></div></Reveal><Reveal><div className="recognition-card"><span>03 / IMPROVE</span><h3>Keep moving<br/>forward.</h3><p>Learn from implementation, test assumptions and improve the experience as needs evolve.</p></div></Reveal></div></section>
 
-        <section className="journey section-wrap" id="journey">
-          <div className="section-heading"><div><p className="eyebrow">04 / EXPERIENCE & LEARNING</p><h2>Grounded in work.<br /><em>Growing by design.</em></h2></div><p className="section-note">A developing professional journey across business, systems and technology.</p></div>
-          <div className="journey-grid">
-            <Reveal><div className="timeline-item"><span className="timeline-date">2023 — 2026</span><div><h3>Payroll & Payslip Systems</h3><p className="timeline-org">Ministry of Finance · Sierra Leone</p><p>Coordinated activities during the development of government payroll and payslip systems, and contributed to monthly payroll dataset analysis and report preparation before payment rollout.</p><span className="timeline-label">PROJECT COORDINATION / DATA ANALYSIS</span></div></div></Reveal>
-            <Reveal delay={120}><div className="education-card"><p className="eyebrow">EDUCATION</p><h3>International Business & Trade</h3><p>Bachelor's degree · Second Class Lower (2:2)</p><div className="education-line" /><h3>Software Engineering</h3><p>Professional certificate</p></div></Reveal>
-          </div>
-        </section>
+    <section className="portfolio section-pad" id="portfolio"><div className="section-intro"><div><p className="kicker">04 / SELECTED WORK</p><h2>Ideas into<br/><em>action.</em></h2></div><p className="intro-aside">A selection of initiatives and digital products, with each project's current stage stated clearly. Open a project to explore more.</p></div><div className="project-list">{projects.map(p => <Reveal key={p.n}><article className={`project-card ${p.cls}`}><div className="project-heading"><span>PROJECT / {p.n}</span><span>{p.status}</span></div><div className="project-layout"><a className="project-image" href={p.url} target="_blank" rel="noreferrer" aria-label={`Open ${p.name}`}><div className="project-image-grid"/><div className="project-image-shape"/><span className="project-symbol">{p.symbol}</span><span className="project-image-caption">{p.caption}</span><span className="project-open">↗</span></a><div className="project-info"><p className="project-kind">{p.kind}</p><h3>{p.name}</h3><p className="project-description">{p.text}</p><div className="project-focus"><span>FOCUS</span><p>{p.focus}</p></div><div className="project-links"><a href={p.url} target="_blank" rel="noreferrer">{p.n === "03" ? "VIEW REPOSITORY" : "VIEW PROJECT"} <b>↗</b></a>{p.repo && <a href={p.repo} target="_blank" rel="noreferrer">SOURCE CODE <b>↗</b></a>}</div></div></div></article></Reveal>)}</div></section>
 
-        <section className="closing section-wrap" id="contact">
-          <Reveal><p className="eyebrow">05 / THE NEXT CHAPTER</p><h2>Have a meaningful<br />problem to <em>solve?</em></h2><p className="closing-copy">I'm interested in thoughtful collaborations, digital product work and opportunities where business and technology come together.</p><a className="button button-light" href="https://github.com/Heezmos" target="_blank" rel="noreferrer">Find me on GitHub <span>↗</span></a></Reveal>
-          <div className="closing-orbit" aria-hidden="true"><span>LET'S MAKE SOMETHING USEFUL</span></div>
-        </section>
-      </main>
-      <footer className="site-footer"><a className="wordmark" href="#top">HM<span>®</span></a><span>© {year} HEEZ MOS · BUILT WITH INTENTION</span><a href="#top">BACK TO TOP ↑</a></footer>
-    </div>
-  );
+    <section className="journey section-pad" id="journey"><div className="section-intro"><div><p className="kicker">05 / EXPERIENCE & EDUCATION</p><h2>Learning by<br/><em>doing.</em></h2></div><p className="intro-aside">A developing professional journey shaped by business education, public-sector digital systems and continuous learning.</p></div><div className="timeline"><Reveal><article className="timeline-item"><span className="timeline-date">2023 — 2026</span><div><p className="kicker">PROJECT COORDINATION / DATA ANALYSIS</p><h3>Payroll & Payslip Systems</h3><h4>Ministry of Finance · Sierra Leone</h4><p>Coordinated activities during the development of government payroll and payslip systems, and participated in monthly payroll dataset analysis and report preparation before payment rollout.</p></div></article></Reveal><Reveal><article className="timeline-item"><span className="timeline-date">EDUCATION</span><div><p className="kicker">01 / DEGREE</p><h3>International Business & Trade</h3><p>Bachelor's degree · Second Class Lower (2:2)</p><p className="kicker education-kicker">02 / PROFESSIONAL CERTIFICATE</p><h3>Software Engineering</h3><p>Professional certificate</p></div></article></Reveal></div></section>
+
+    <section className="reviews section-pad" id="reviews"><p className="kicker">06 / RECOMMENDATIONS</p><div className="review-grid"><h2>Trust is built<br/><em>through work.</em></h2><div><p>Professional recommendations and testimonials will appear here when they have been provided and approved for publication. I believe credibility should be earned — and represented honestly.</p><span className="review-status">GENUINE FEEDBACK · SHARED WITH PERMISSION</span></div></div></section>
+
+    <section className="contact section-pad" id="contact"><div className="contact-top"><p className="kicker">HAVE A PROJECT OR AN IDEA?</p><span>OPEN TO MEANINGFUL COLLABORATION</span></div><h2>Let's build<br/><em>what matters.</em></h2><div className="contact-bottom"><p>Have a business challenge, a product idea or an opportunity to create something useful? Let's start a conversation.</p><a className="button button-dark" href="https://github.com/Heezmos" target="_blank" rel="noreferrer">CONNECT WITH ME <b>↗</b></a></div></section>
+  </main><footer className="footer"><a className="brand" href="#top">HM<span>®</span></a><span>© {year} HEEZ MOS — BUSINESS IN MIND. TECHNOLOGY IN MOTION.</span><a href="#top">BACK TO TOP ↑</a></footer></div>;
 }
-
 export default App;

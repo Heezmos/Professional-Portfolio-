@@ -39,8 +39,8 @@ function Header() {
   return <header className="header"><a className="brand" href="#top">HM<span>®</span></a><button className="menu-button" aria-label="Toggle navigation" aria-expanded={open} onClick={() => setOpen(!open)}><i/><i/></button><nav className={open ? "nav open" : "nav"}>{links.map(([label, href]) => <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>)}</nav><a className="nav-cta" href="#contact">LET'S TALK <b>↗</b></a></header>;
 }
 function HeroArtwork() {
-  return <div className="hero-art" aria-label="Abstract editorial artwork representing business and technology">
-    <div className="hero-art-image"><div className="art-sun"/><div className="art-orbit orbit-one"/><div className="art-orbit orbit-two"/><div className="art-slab slab-one"/><div className="art-slab slab-two"/><span className="art-monogram">HM</span><span className="art-vertical">IDEAS / SYSTEMS / IMPACT</span></div>
+  return <div className="hero-art">
+    <img className="hero-portrait" src="/images/heez-mos.webp" alt="Heez Mos wearing a charcoal suit and red tie" width="512" height="512" fetchPriority="high" />
     <span className="art-caption caption-left">INDEPENDENT THINKING</span><span className="art-caption caption-right">FREETOWN · SIERRA LEONE</span>
   </div>;
 }
